@@ -11,11 +11,6 @@ pipeline {
                 sh 'mvn -v'
             }
         }
-        stage('sout setting xml') {
-            steps {
-                mvn help:effective-settings
-            }
-        }
         stage('Build') {
             steps {
                 sh 'mvn clean package'
