@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maaaven' // Имя Maven из Global Tool Configuration
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -9,22 +13,16 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'chmod +x ./mvnw'
-                sh './mvnw clean install'
+                sh 'mvn clean package'
             }
         }
-        stage('Test') {
+        stage('Deploy to Nexus') {
             steps {
-                sh './mvnw test'
+                // Публикуем артефакты в Nexus
+                sh '''
+                mvn deploy -DaltDeploymentRepository=nexus::default::http://nexus:8081/repository/maven-releases/
+                '''
             }
-        }
-    }
-    post {
-        always {
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-        }
-        failure {
-            echo 'Сборка завершилась с ошибкой'
         }
     }
 }
