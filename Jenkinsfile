@@ -2,15 +2,10 @@ pipeline {
     agent any
 
     tools {
-        maven 'maaaven' // Имя Maven из Global Tool Configuration
+        maven 'maaaven' // Убедитесь, что Maven3 настроен в Global Tool Configuration
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
         stage('Build') {
             steps {
                 sh 'mvn clean package'
@@ -18,10 +13,7 @@ pipeline {
         }
         stage('Deploy to Nexus') {
             steps {
-                // Публикуем артефакты в Nexus
-                sh '''
-                mvn deploy -DaltDeploymentRepository=nexus::default::http://nexus:8081/repository/test-repo/
-                '''
+                sh 'mvn deploy'
             }
         }
     }
