@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     tools {
-        maven 'maaaven' // Убедитесь, что Maven3 настроен в Global Tool Configuration
+        maven 'maaven' // Убедитесь, что Maven3 настроен в Global Tool Configuration
     }
 
     stages {
