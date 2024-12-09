@@ -192,3 +192,25 @@ stages:
 
 
 ## Настройка пайплайна - изголяемся как можем
+1. Подстановка параметров из конфиг файла с помощью мавен плагина
+```xml
+<plugin>
+   <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-antrun-plugin</artifactId>
+    <version>1.8</version>
+    <executions>
+        <execution>
+            <phase>initialize</phase>
+            <goals>
+                <goal>run</goal>
+            </goals>
+            <configuration>
+                <tasks>
+                    <property file="version_config.json" />
+                </tasks>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+```
+2. Загрузка параметровр из инфентори репозитория
