@@ -20,7 +20,7 @@ pipeline {
             steps {
                 // Публикуем артефакты в Nexus
                 sh '''
-                mvn deploy -DaltDeploymentRepository=nexus::default::http://localhost:8081/repository/test-repo/
+                mvn deploy -DaltDeploymentRepository=nexus::default::http://nexus:8081/repository/test-repo/
                 '''
             }
         }
