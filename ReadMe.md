@@ -9,10 +9,6 @@
 1. [Введение](#введение)
 2. [Настройка Nexus](#настройка-nexus)
 3. [Настройка Jenkins](#настройка-jenkins)
-4. [Настройка Maven](#настройка-maven)
-5. [Интеграция Jenkins и Nexus](#интеграция-jenkins-и-nexus)
-6. [Проблемы и решения](#проблемы-и-решения)
-7. [Заключение](#заключение)
 
 ## Введение
 
@@ -24,6 +20,7 @@
 
 1. **Установка Nexus**:
 Мы установили Nexus Repository Manager, который будет использоваться для хранения артефактов (JAR, WAR и т.д.).
+- не забудь создать <b>volumes в проекте
 ```dockerfile
 version: '3.8'
 
@@ -59,7 +56,7 @@ networks:
 ## Настройка Jenkins
 
 1. **Установка Jenkins**:
-   Jenkins был установлен в нашем окружении. Мы использовали Docker для развертывания Jenkins.
+   Мы использовали Docker для развертывания Jenkins.
 ```dockerfile
 version: '3.8'
 
@@ -85,7 +82,6 @@ networks:
     driver: bridge
 ```
 
-
 2. **Установка плагинов**:
    Для работы с Maven и Nexus были установлены следующие плагины:
     - **Pipeline Plugin**: Для создания пайплайнов в Jenkins.
@@ -96,7 +92,7 @@ networks:
    - В Jenkins мы настроили Maven, указав путь к установке Maven в настройках Jenkins 
    (Tools → Установка мавен, автоматическая установка). Имя maaven.
    - В разделе managed files создадим глобавльные и локальные настройки settings.xml. 
-   - <b>У меня настройки не применились и мне пришлось изменять файл настроек мавено по пути </b>
+   - <b>У меня настройки не применились и мне пришлось изменять файл настроек мавена по пути </b>
      `.\jenkinsdata\tools\hudson.tasks.Maven_MavenInstallation\maaven\conf\settings.xml`
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -169,4 +165,29 @@ pipeline {
 }
 ```
 
+5. **Альтернативный пайплан .yaml**
+   - Необходимо установить плагин Pipeline as YAML
+```yaml
+version: '1'
+stages:
+  - name: Build
+    steps:
+      - script: |
+          echo "Building the project"
+          mvn clean install
 
+  - name: Test
+    steps:
+      - script: |
+          echo "Running tests"
+          mvn test
+
+  - name: Deploy
+    steps:
+      - script: |
+          echo "Deploying to Nexus"
+          mvn deploy -s /path/to/settings.xml
+```
+
+
+## Настройка пайплайна - изголяемся как можем
