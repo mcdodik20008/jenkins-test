@@ -10,7 +10,7 @@
     </parent>
     <groupId>mcdodik</groupId>
     <artifactId>jkin-api</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <name>jkin-api</name>
     <description>jkin-api</description>
     <distributionManagement>
