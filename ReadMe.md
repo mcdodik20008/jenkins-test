@@ -167,6 +167,7 @@ pipeline {
 
 5. **Альтернативный пайплан .yaml**
    - Необходимо установить плагин Pipeline as YAML
+   - В настройках сборки 
 ```yaml
 version: '1'
 stages:
