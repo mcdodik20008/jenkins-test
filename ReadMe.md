@@ -171,23 +171,30 @@ pipeline {
 ```yaml
 version: '1'
 stages:
-  - name: Build
-    steps:
-      - script: |
-          echo "Building the project"
-          mvn clean install
+   - name: Checkout
+     steps:
+        - script: |
+             echo "Cloning repository"
+             git clone https://github.com/mcdodik20008/jenkins-test.git
+             cd jenkins-test
 
-  - name: Test
-    steps:
-      - script: |
-          echo "Running tests"
-          mvn test
+   - name: Build
+     steps:
+        - script: |
+             echo "Building the project"
+             mvn clean install
 
-  - name: Deploy
-    steps:
-      - script: |
-          echo "Deploying to Nexus"
-          mvn deploy -s /path/to/settings.xml
+   - name: Test
+     steps:
+        - script: |
+             echo "Running tests"
+             mvn test
+
+   - name: Deploy
+     steps:
+        - script: |
+             echo "Deploying to Nexus"
+             mvn deploy
 ```
 
 

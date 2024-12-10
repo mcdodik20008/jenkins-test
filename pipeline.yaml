@@ -4,8 +4,8 @@ stages:
     steps:
       - script: |
           echo "Cloning repository"
-          git clone https://github.com/yourusername/yourrepo.git
-          cd yourrepo
+          git clone https://github.com/mcdodik20008/jenkins-test.git
+          cd jenkins-test
 
   - name: Build
     steps:
@@ -23,4 +23,4 @@ stages:
     steps:
       - script: |
           echo "Deploying to Nexus"
-          mvn deploy -s /path/to/settings.xml
+          mvn deploy
