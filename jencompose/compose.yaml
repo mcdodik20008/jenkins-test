@@ -11,7 +11,7 @@ services:
       - "8080:8080" # Порт для доступа к веб-интерфейсу Jenkins
       - "50000:50000" # Порт для связи агентов Jenkins
     volumes:
-      - E:\javaProject\jkin-api\jenkinsdata:/var/jenkins_home
+      - .\jenkinsdata:/var/jenkins_home
 #    environment:
 #      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
     networks:
@@ -23,7 +23,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - E:\javaProject\jkin-api\nexusdata:/nexus-data
+      - .\nexusdata:/nexus-data
     environment:
       - INSTALL4J_ADD_VM_PARAMS=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=2g
     networks:
@@ -35,9 +35,9 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - E:\javaProject\jkin-api\sq\data:/opt/sonarqube/data
-      - E:\javaProject\jkin-api\sq\logs:/opt/sonarqube/logs
-      - E:\javaProject\jkin-api\sq\ext:/opt/sonarqube/extensions
+      - .\sq\data:/opt/sonarqube/data
+      - .\sq\logs:/opt/sonarqube/logs
+      - .\sq\ext:/opt/sonarqube/extensions
     environment:
       SONAR_ES_BOOTSTRAP_CHECKS_DISABLE: "true"
     networks:
