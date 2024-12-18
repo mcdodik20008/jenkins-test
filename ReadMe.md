@@ -31,7 +31,7 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - E:\javaProject\jkin-api\nexusdata:/nexus-data
+      - .\nexusdata:/nexus-data
     environment:
       - INSTALL4J_ADD_VM_PARAMS=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=2g
     networks:
@@ -71,7 +71,7 @@ services:
       - "8080:8080" # Порт для доступа к веб-интерфейсу Jenkins
       - "50000:50000" # Порт для связи агентов Jenkins
     volumes:
-      - E:\javaProject\jkin-api\jenkinsdata:/var/jenkins_home
+      - .\jenkinsdata:/var/jenkins_home
 #    environment: # пропустить установку (лучше не надо)
 #      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
     networks:
